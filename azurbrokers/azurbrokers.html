@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our New Website is Launching Soon!</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+    <style>
+        html,
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            overflow: hidden;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            width: 85vw;
+            max-width: 947px;
+            min-width: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rem;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            text-align: center;
+            color: #111;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .timer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+            width: 100%;
+            margin: 0, 16px;
+        }
+
+        .timer__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            margin: 16px 0;
+            border-radius: 0;
+            box-sizing: border-box;
+            min-width: 150px;
+            width: 150px;
+            min-height: 110px;
+            height: 110px;
+        }
+
+        .timer__number {
+            font-size: 64px;
+            font-weight: 300;
+            color: #111;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .timer__label {
+            font-size: 18px;
+            color: #111;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        footer {
+            flex-shrink: 0;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        .footer-label {
+            font-size: clamp(16px, 3vw, 24px);
+            font-weight: 500;
+            color: #111;
+            text-decoration: none;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(16px, 3vw, 24px);
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 12px 0;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 960px) {
+            .timer__number {
+                font-size: 40px;
+            }
+
+            .title {
+                font-size: 40px;
+            }
+
+            .timer__item {
+                min-width: 90px;
+                width: 90px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+            .timer__number {
+                font-size: 32px;
+            }
+
+            .title {
+                font-size: 32px;
+            }
+
+            .timer__item {
+                min-width: 70px;
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1 class="title">Our new website is launching soon!</h1>
+        <div class="timer" id="countdown"></div>
+    </div>
+    <footer>
+        <p><span class="footer-label">Contact us:</span> <a href="mailto:info@azurbrokers.com">info@azurbrokers.com</a>
+        </p>
+    </footer>
+
+    <script>
+        const targetDate = new Date('2025-07-07T09:00:00-07:00');
+        const countdownElement = document.getElementById('countdown');
+        const titleElement = document.querySelector('.title');
+
+        function createTimerItem(value, label) {
+            return `
+                <div class="timer__item">
+                    <div class="timer__number">${value}</div>
+                    <div class="timer__label">${label}</div>
+                </div>
+            `;
+        }
+
+        function getLabel(value, singular, plural) {
+            return value === 1 ? singular : plural;
+        }
+
+        function getTimeParts(ms) {
+            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+            return { days, hours, minutes, seconds };
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const remainingTime = targetDate - now;
+
+            if (remainingTime <= 0) {
+                if (countdownElement) countdownElement.remove();
+                if (titleElement) titleElement.textContent = 'We have launched!';
+                clearInterval(interval);
+            } else {
+                const { days, hours, minutes, seconds } = getTimeParts(remainingTime);
+                countdownElement.innerHTML = `
+                    ${createTimerItem(days, getLabel(days, 'Day', 'Days'))}
+                    ${createTimerItem(hours, getLabel(hours, 'Hour', 'Hours'))}
+                    ${createTimerItem(minutes, getLabel(minutes, 'Minute', 'Minutes'))}
+                    ${createTimerItem(seconds, getLabel(seconds, 'Second', 'Seconds'))}
+                `;
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+
+</html>

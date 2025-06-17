@@ -1,0 +1,50 @@
+services:
+  site-1:
+    build: ./azurrealty
+    restart: always
+    environment:
+      - VIRTUAL_HOST=azurrealty.ae
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=azurrealty.ae
+      - LETSENCRYPT_EMAIL=tech@dotwrk.com
+
+  site-2:
+    build: ./azurbrokers
+    restart: always
+    environment:
+      - VIRTUAL_HOST=azurbrokers.com
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=azurbrokers.com
+      - LETSENCRYPT_EMAIL=tech@dotwrk.com
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    restart: always
+    environment:
+      - DEFAULT_EMAIL=tech@dotwrk.com
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:
