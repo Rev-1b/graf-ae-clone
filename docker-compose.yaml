@@ -1,6 +1,8 @@
 services:
   site-1:
-    build: ./azurrealty
+    build:
+      context: .
+      dockerfile: ./azurrealty/Dockerfile
     restart: always
     environment:
       - VIRTUAL_HOST=azurrealty.ae
@@ -9,7 +11,9 @@ services:
       - LETSENCRYPT_EMAIL=tech@dotwrk.com
 
   site-2:
-    build: ./azurbrokers
+    build:
+      context: .
+      dockerfile: ./azurbrokers/Dockerfile
     restart: always
     environment:
       - VIRTUAL_HOST=azurbrokers.com
