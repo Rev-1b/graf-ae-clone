@@ -5,9 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our New Website is Launching Soon!</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=DM+Serif+Display&display=swap"
-        rel="stylesheet">
+    <meta name="description" content="Our new website is launching soon!">
+    <meta name="keywords" content="azurbrokers, website, launch, soon">
+    <meta name="author" content="Azur Brokers">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta name="google-site-verification" content="google-site-verification=google-site-verification">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22white%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-size%3D%2236%22%20text-anchor%3D%22middle%22%20fill%3D%22black%22%20dy%3D%22.3em%22%3EAB%3C%2Ftext%3E%3C%2Fsvg%3E">
+    <link href="https://fonts.cdnfonts.com/css/segoe-ui-4" rel="stylesheet">
     <style>
         html,
         body {
@@ -16,7 +25,7 @@
             padding: 0;
             background: #fff;
             overflow: hidden;
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Segoe UI', 'Segoe UI Webfont', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
@@ -41,7 +50,6 @@
         }
 
         .title {
-            font-family: 'DM Serif Display', serif;
             font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 400;
             line-height: 1.1;
@@ -108,7 +116,6 @@
         a {
             color: #007BFF;
             text-decoration: none;
-            font-family: 'Manrope', sans-serif;
             font-size: clamp(16px, 3vw, 24px);
             font-weight: 500;
             transition: color 0.2s;
@@ -135,6 +142,9 @@
                 width: 90px;
             }
 
+            footer {
+                padding-bottom: 4rem;
+            }
         }
 
         @media (max-width: 600px) {
@@ -149,6 +159,16 @@
             .timer__item {
                 min-width: 70px;
                 width: 70px;
+            }
+
+            footer {
+                padding-bottom: 6rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            footer {
+                padding-bottom: 8rem;
             }
         }
     </style>
